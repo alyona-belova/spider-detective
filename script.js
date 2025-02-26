@@ -1,0 +1,221 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const startBtn = document.getElementById("start-btn");
+  const taskContainer = document.getElementById("task-container");
+  const story = document.getElementById("story");
+
+  startBtn.addEventListener("click", () => {
+    story.style.display = "none";
+    taskContainer.style.display = "block";
+    showTask1();
+  });
+
+  function showTask1() {
+    taskContainer.innerHTML = `
+        <h2>Задание 1: Взлом зашифрованного файла</h2>
+        <div class="card-container">
+        <div class="card" style="margin: 0;">
+        <p>В компьютере Питер обнаружил таинственный файл с данными о последнем посетителе лаборатории. Но есть проблема – данные надежно зашифрованы.</p>
+        <button onclick="downloadFile()">Скачать файл</button>
+        </div>
+        <div class="card sticker-card" style="margin: 0; width: 100px; height: 100px;">
+        <p>openssl</p>
+        <p>spideypass</p>
+        </div>
+        </div>
+        <input type="text" id="answer1" placeholder="Введите ответ">
+        <button onclick="checkTask1()">Проверить</button>
+        <p id="hint1"></p>
+        <button class="button-secondary" onclick="showHint1()">Подсказка</button>
+        <div id="hidden-card" class="card hidden">
+        <p>openssl aes-256-cbc -d -a -in encrypted.txt -out decrypted.txt -pass pass:spideypass</p>
+        </div>
+      `;
+  }
+
+  window.downloadFile = function () {
+    const content = `U2FsdGVkX189kyESxneTFB7FdqnP29p9kwwfqED2EBc=
+    `;
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "encrypted.txt";
+    link.click();
+
+    URL.revokeObjectURL(url);
+  };
+
+  window.checkTask1 = function () {
+    const answer = document
+      .getElementById("answer1")
+      .value.trim()
+      .toLowerCase();
+    const hint = document.getElementById("hint1");
+    if (answer === "gwen") {
+      hint.innerText = "✅ Да! Последней в лаборатории была Гвен.";
+      setTimeout(showTask2, 1500);
+    } else {
+      hint.innerText = "❌ Нет, попробуй еще раз.";
+    }
+  };
+
+  window.showHint1 = function () {
+    document.getElementById("hidden-card").classList.remove("hidden");
+  };
+
+  // Задание 2: Шкатулка в рюкзаке Гвен
+  function showTask2() {
+    taskContainer.innerHTML = `
+        <h2>Задание 2: Тайна шкатулки</h2>
+        <div class="card">
+        <p>Даша и Питер находят след Гвен в школе – она оставила свой рюкзак в одном из кабинетов. Внутри они обнаруживают загадочную шкатулку с кодовым замком и старую тетрадь. На первой странице аккуратным почерком написана странная подсказка:</p>
+        </div>
+        <div class="card sticker-card">
+        <p>"Сегодня мой День Рождения, и у меня есть 5 свечей. В прошлом году я зажигала 4 из них, а через 7 лет планирую зажечь все 5. Сколько мне исполняется лет и сколько свечей следует зажечь сегодня?"</p>
+        </div>
+        <input type="text" id="answer2" placeholder="000" maxlength="3" pattern="\d{3}" oninput="validateDigits(this)">
+        <button onclick="checkTask2()">Проверить</button>
+        <p id="hint2"></p>
+        <button class="button-secondary" onclick="showHint1()">Подсказка</button>
+        <div id="hidden-card" class="card hidden">
+        <p>В позапрошлом году и в позапозапрошлом было по 3 свечи, а еще за год до этого – только 2</p>
+        </div>
+      `;
+  }
+
+  // Проверка ответа для задания 2
+  window.checkTask2 = function () {
+    const answer = document.getElementById("answer2").value.trim();
+    const hint = document.getElementById("hint2");
+    if (answer === "242") {
+      hint.innerText =
+        "✅ Да! 24 года – это 11000 в двоичной системе, значит нужно зажечь 2 свечи.";
+      setTimeout(showTask3, 2000);
+    } else {
+      hint.innerText = "❌ Нет, попробуй еще раз.";
+    }
+  };
+
+  window.validateDigits = function (input) {
+    input.value = input.value.replace(/\D/g, "").slice(0, 3);
+  };
+
+  // Задание 3: Задание с кабинетами
+  function showTask3() {
+    taskContainer.innerHTML = `
+        <h2>Задание 3: Какая дверь ведет к Гвен?</h2>
+        <div class="card">
+        <p>В шкатулке Даша нашла записку: "Жду тебя в кабинете 307." Не теряя времени, они с Питером отправились в указанную аудиторию, которая по совместительству была кабинетом музыки.</p>
+        <p>Однако попасть внутрь не удалось – на двери висела табличка с просьбой обращаться по всем вопросам к учителю. Но он как всегда был не в духе и, даже не выслушав, отмахнулся:  "С кабинетом, который вам нужен, все ОК! Не занимайте мое время." Куда же отправилась Гвен?</p>
+        </div>
+        <div class="building">
+          <div class="floor">
+            <h3>5 этаж</h3>
+            <button class="door" onclick="showPopup(500)">500</button>
+            <button class="door" onclick="showPopup(501)">501</button>
+            <button class="door" onclick="showPopup(502)">502</button>
+            <button class="door" onclick="showPopup(503)">503</button>
+            <button class="door" onclick="showPopup(504)">504</button>
+            <button class="door" onclick="showPopup(505)">505</button>
+            <button class="door" onclick="showPopup(506)">506</button>
+            <button class="door" onclick="showPopup(507)">507</button>
+          </div>
+
+          <div class="floor">
+            <h3>4 этаж</h3>
+            <button class="door" onclick="showPopup(400)">400</button>
+            <button class="door" onclick="showPopup(401)">401</button>
+            <button class="door" onclick="showPopup(402)">402</button>
+            <button class="door" onclick="showPopup(403)">403</button>
+            <button class="door" onclick="showPopup(404)">404</button>
+            <button class="door" onclick="showPopup(405)">405</button>
+            <button class="door" onclick="showPopup(406)">406</button>
+            <button class="door" onclick="showPopup(407)">407</button>
+          </div>
+
+          <div class="floor">
+            <h3>3 этаж</h3>
+            <button class="door" onclick="showPopup(300)">300</button>
+            <button class="door" onclick="showPopup(301)">301</button>
+            <button class="door" onclick="showPopup(302)">302</button>
+            <button class="door" onclick="showPopup(303)">303</button>
+            <button class="door" onclick="showPopup(304)">304</button>
+            <button class="door" onclick="showPopup(305)">305</button>
+            <button class="door" onclick="showPopup(306)">306</button>
+            <button class="door" onclick="showPopup(307)">307</button>
+          </div>
+
+          <div class="floor">
+            <h3>2 этаж</h3>
+            <button class="door" onclick="showPopup(200)">200</button>
+            <button class="door" onclick="showPopup(201)">201</button>
+            <button class="door" onclick="showPopup(202)">202</button>
+            <button class="door" onclick="showPopup(203)">203</button>
+            <button class="door" onclick="showPopup(204)">204</button>
+            <button class="door" onclick="showPopup(205)">205</button>
+            <button class="door" onclick="showPopup(206)">206</button>
+            <button class="door" onclick="showPopup(207)">207</button>
+          </div>
+        </div>
+        <input type="text" id="answer3" placeholder="000" maxlength="3" pattern="\d{3}" oninput="validateDigits(this)">
+        <button onclick="checkTask3()">Проверить</button>
+        <p id="hint3"></p>
+        <button class="button-secondary" onclick="showHint1()">Подсказка</button>
+        <div id="hidden-card" class="card hidden">
+        <p>Проверять комнату 404 – всегда плохая идея</p>
+        </div>
+        <div id="popup" class="popup hidden">
+          <p id="popup-message"></p>
+          <button onclick="closePopup()">Закрыть</button>
+        </div>
+      `;
+  }
+
+  // Проверка ответа для задания 3
+  window.checkTask3 = function () {
+    const answer = document.getElementById("answer3").value.trim();
+    const hint = document.getElementById("hint3");
+    if (answer === "200") {
+      hint.innerText =
+        "✅ Ура! The HTTP 200 OK и тайная комната наконец-то открыта...";
+      setTimeout(showFinal, 2000);
+    } else {
+      hint.innerText = "❌ Нет, попробуй еще раз.";
+    }
+  };
+
+  window.showPopup = function (door) {
+    const messages = {
+      204: '"Срочно требуется закупить стулья и парты в 204 аудиторию!" В кабинете пусто.',
+      404: "Эта дверь никуда не ведет.",
+      307: '"Кабинет музыки временно переехал. Детали уточняйте у мистера Никогда-Нет-На-Вас-Времени."',
+      403: '"Только для учителей!!"',
+      400: '"Co-working space. Уроки здесь проводить нельзя."',
+      500: '"Извините, кабинет находится на ремонте."',
+    };
+
+    const message = messages[door] || "Самая обычная дверь.";
+
+    document.getElementById("popup-message").textContent = message;
+    document.getElementById("popup").classList.remove("hidden");
+  };
+
+  window.closePopup = function () {
+    document.getElementById("popup").classList.add("hidden");
+  };
+
+  // Финал: Сюрприз-вечеринка
+  function showFinal() {
+    taskContainer.innerHTML = `
+        <h2>🎉 Сюрприз!!</h2>
+        <div class="card" style="text-align: start;">
+        <p>– С Днем Рождения! – хором закричали твои друзья, выпрыгивая из укрытия.</p>
+        <p>Внутри кабинета мерцали яркие гирлянды, повсюду были красно-синие воздушные шары, а в центре стоял огромный торт с паутинкой из шоколада. Пока Даша разгадывала загадки, Гвен подготовила сюрприз-вечеринку, а Питер… ну, он просто тянул время.</p>
+        <p>– Прости за всю эту детективную суету и кражу костюма, – смеется Питер, почесывая затылок. – Но я должен был как-то отвлечь тебя. Надеюсь, загадки были не слишком сложными?</p>
+        <p>Сегодня Даша не только раскрыла очередную тайну, но и хорошо провела время с друзьями.</p>
+        <p>Конец!</p>
+        </div>
+      `;
+  }
+});
