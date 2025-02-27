@@ -4,5 +4,8 @@
   "deploy": "gh-pages -d dist",
   "devDependencies": {
     "gh-pages": "^6.3.0"
+  },
+  "dependencies": {
+    "crypto-js": "^4.2.0"
   }
 }

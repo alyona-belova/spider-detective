@@ -52,7 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
       .value.trim()
       .toLowerCase();
     const hint = document.getElementById("hint1");
-    if (answer === "gwen") {
+    const encrypted_answer = CryptoJS.SHA256(answer, "spideypass").toString();
+    if (
+      encrypted_answer ===
+      "e7ddef299291b3f9d0c9d9bf46f9e76ef006ff2a83caa670e654b9a5efc9e164"
+    ) {
       hint.innerText = "✅ Да! Последней в лаборатории была Гвен.";
       setTimeout(showTask2, 1500);
     } else {
@@ -64,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("hidden-card").classList.remove("hidden");
   };
 
-  // Задание 2: Шкатулка в рюкзаке Гвен
   function showTask2() {
     taskContainer.innerHTML = `
         <h2>Задание 2: Тайна шкатулки</h2>
@@ -84,11 +87,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
   }
 
-  // Проверка ответа для задания 2
   window.checkTask2 = function () {
     const answer = document.getElementById("answer2").value.trim();
     const hint = document.getElementById("hint2");
-    if (answer === "242") {
+    const encrypted_answer = CryptoJS.SHA256(answer, "spideypass").toString();
+    if (
+      encrypted_answer ===
+      "14063697603e22d600d336bee6cff12c8be93509ce84a0642918d89b2aef1753"
+    ) {
       hint.innerText =
         "✅ Да! 24 года – это 11000 в двоичной системе, значит нужно зажечь 2 свечи.";
       setTimeout(showTask3, 2000);
@@ -101,7 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
     input.value = input.value.replace(/\D/g, "").slice(0, 3);
   };
 
-  // Задание 3: Задание с кабинетами
   function showTask3() {
     taskContainer.innerHTML = `
         <h2>Задание 3: Какая дверь ведет к Гвен?</h2>
@@ -172,11 +177,14 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
   }
 
-  // Проверка ответа для задания 3
   window.checkTask3 = function () {
     const answer = document.getElementById("answer3").value.trim();
     const hint = document.getElementById("hint3");
-    if (answer === "200") {
+    const encrypted_answer = CryptoJS.SHA256(answer, "spideypass").toString();
+    if (
+      encrypted_answer ===
+      "27badc983df1780b60c2b3fa9d3a19a00e46aac798451f0febdca52920faaddf"
+    ) {
       hint.innerText =
         "✅ Ура! The HTTP 200 OK и тайная комната наконец-то открыта...";
       setTimeout(showFinal, 2000);
@@ -205,7 +213,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("popup").classList.add("hidden");
   };
 
-  // Финал: Сюрприз-вечеринка
   function showFinal() {
     taskContainer.innerHTML = `
         <h2>🎉 Сюрприз!!</h2>
