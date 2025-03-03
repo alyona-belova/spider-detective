@@ -276,6 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function playSound() {
     const audio = new Audio("assets/partyblower.mp3");
+    audio.volume = 0.02;
     audio.play();
   }
 });
