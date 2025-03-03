@@ -56,12 +56,14 @@ button:hover {
 }
 
 input {
+  width: 200px;
   padding: 10px 16px;
-  border-radius: 8px;
   font-size: 16px;
+  border-radius: 8px;
   outline: none;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   border: 2px solid transparent;
+  height: auto;
 }
 
 input:focus {
@@ -106,7 +108,13 @@ h2 {
 
 .input-group {
   display: flex;
+  align-items: center;
+  gap: 10px;
   margin-top: 10px;
+}
+
+.input-group input {
+  margin-bottom: 0;
 }
 
 .building {
