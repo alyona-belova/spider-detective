@@ -99,6 +99,16 @@ h2 {
   text-align: center;
 }
 
+#hint1,
+#hint2,
+#hint3 {
+  min-height: 20px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  margin: 10px auto;
+}
+
 .cards-stack {
   display: flex;
   flex-direction: column;
