@@ -227,7 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showFinal() {
     flashBackground();
-    revealPrize();
     playSound();
     confetti({
       particleCount: 200,
@@ -256,22 +255,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.style.background = colors[i % colors.length];
       i++;
     }, 500);
-  }
-
-  function revealPrize() {
-    const prizes = [
-      "Плюшевый паучок! 🧸",
-      "Шпионские очки! 👓",
-      "Паутинный бластер! 🔫",
-      "Постер с Человеком-Пауком! 🌌",
-    ];
-    const prize = prizes[Math.floor(Math.random() * prizes.length)];
-
-    const prizeBox = document.createElement("div");
-    prizeBox.innerHTML = `<h2>Тебе попался подарок: ${prize}</h2>`;
-    prizeBox.style.cssText =
-      "text-align: center; color: white; font-size: 1em;";
-    document.body.appendChild(prizeBox);
   }
 
   function playSound() {
